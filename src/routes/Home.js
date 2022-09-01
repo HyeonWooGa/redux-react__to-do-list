@@ -1,14 +1,17 @@
 import { useState } from "react";
-import { connect, useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { actionAdd } from "../store";
 
 function Home() {
   const toDos = useSelector((state) => state);
-  const [text, setText] = useState();
+  const dispatch = useDispatch();
+  const [text, setText] = useState("");
   const onChange = (event) => {
     setText(event.target.value);
   };
   const onSubmit = (event) => {
     event.preventDefault();
+    dispatch(actionAdd(text));
     setText("");
   };
   return (
@@ -23,7 +26,11 @@ function Home() {
         />
         <button>입력</button>
       </form>
-      <ul>{JSON.stringify(toDos)}</ul>
+      <ul>
+        {toDos.map((toDo) => (
+          <li key={toDo.id}>{toDo.text}</li>
+        ))}
+      </ul>
     </>
   );
 }
