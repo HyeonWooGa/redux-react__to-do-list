@@ -18,7 +18,7 @@ export const actinoDelete = (id) => {
   };
 };
 
-const reducer = (state = [], action) => {
+const reducer = (state = ["hello"], action) => {
   switch (action.type) {
     case ADD:
       return [...state, { text: action.text, id: Date.now() }];
