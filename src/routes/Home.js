@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { actionAdd } from "../store";
+import { actinoDelete, actionAdd } from "../store";
 
 function Home() {
   const toDos = useSelector((state) => state);
@@ -9,11 +9,18 @@ function Home() {
   const onChange = (event) => {
     setText(event.target.value);
   };
+
   const onSubmit = (event) => {
     event.preventDefault();
     dispatch(actionAdd(text));
     setText("");
   };
+
+  const onClick = (event) => {
+    //console.log(event.target.parentNode.id);
+    dispatch(actinoDelete(event.target.parentNode.id));
+  };
+
   return (
     <>
       <h1>To Do List</h1>
@@ -27,9 +34,14 @@ function Home() {
         <button>입력</button>
       </form>
       <ul>
-        {toDos.map((toDo) => (
-          <li key={toDo.id}>{toDo.text}</li>
-        ))}
+        {toDos.map((toDo) => {
+          return (
+            <li id={toDo.id} key={toDo.id}>
+              {toDo.text}&nbsp;&nbsp;
+              <button onClick={onClick}>❌</button>
+            </li>
+          );
+        })}
       </ul>
     </>
   );

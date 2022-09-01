@@ -23,7 +23,7 @@ const reducer = (state = [], action) => {
     case ADD:
       return [...state, { text: action.text, id: Date.now() }];
     case DELETE:
-      return state.filter((toDo) => toDo.id !== action.id);
+      return state.filter((toDo) => toDo.id !== parseInt(action.id));
     default:
       return state;
   }
