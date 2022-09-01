@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { connect } from "react-redux";
+import { connect, useSelector } from "react-redux";
 
-function Home({ toDos }) {
-  //console.log(props);
+function Home() {
+  const toDos = useSelector((state) => state);
   const [text, setText] = useState();
   const onChange = (event) => {
     setText(event.target.value);
@@ -28,8 +28,8 @@ function Home({ toDos }) {
   );
 }
 
-function mapStateToProps(state) {
+/* function mapStateToProps(state) {
   return { toDos: state };
-}
+} */
 
-export default connect(mapStateToProps)(Home);
+export default Home;
